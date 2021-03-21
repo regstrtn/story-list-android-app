@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/StoryContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#455a64"
+    android:orientation="vertical">
+
+  <ImageView
+      android:id="@+id/StoryImage"
+      android:layout_width="match_parent"
+      android:layout_height="450dp"
+      android:scaleType="centerCrop"
+      android:background="#000000"
+      android:padding="2dp"
+      tools:srcCompat="@tools:sample/backgrounds/scenic" />
+  <TextView
+      android:id="@+id/StoryTitle"
+      android:textStyle="bold"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:fontFamily="@font/montserrat"
+      android:paddingHorizontal="10dp"
+      android:paddingVertical="4dp"
+      android:text="StoryTitle"
+      android:textColor="#ffffff"
+      android:textSize="20sp" />
+  <LinearLayout
+      android:id="@+id/StoryMetadataContainer"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+    <TextView
+        android:id="@+id/AuthorName"
+        android:textStyle="italic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/montserrat"
+        android:textColor="#ffffff"
+        android:paddingHorizontal="10dp"
+        android:text="Admin" />
+    <TextView
+        android:id="@+id/AuthorPostCount"
+        android:textStyle="italic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/montserrat"
+        android:textColor="#ffffff"
+        android:text="39 posts" />
+    <ImageView
+        android:id="@+id/LikeButtonImage"
+        android:layout_width="10dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/likebuttonwhite" />
+    <TextView
+        android:id="@+id/StoryLikeCount"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/montserrat"
+        android:textColor="#ffffff"
+        android:text="113 " />
+    <TextView
+        android:id="@+id/_EmptyFillerBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3" />
+  </LinearLayout>
+  <TextView
+      android:id="@+id/StoryMainBody"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingBottom="4dp"
+      android:fontFamily="@font/montserrat"
+      android:textColor="#ffffff"
+      android:paddingHorizontal="10dp"
+      android:paddingVertical="4dp"
+      android:text="MainBody"
+      android:textSize="16sp" />
+</LinearLayout>

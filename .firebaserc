@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "storylist-android-app",
+    "storylist": "storylist-android-app"
+  }
+}

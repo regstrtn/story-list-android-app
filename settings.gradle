@@ -1,0 +1,2 @@
+rootProject.name = "EmptyActivity1"
+include ':app'

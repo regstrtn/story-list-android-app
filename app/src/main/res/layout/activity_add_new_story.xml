@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.android.StoryList.AddNewStory">
+
+  <ImageView
+      android:id="@+id/InputStoryImage"
+      android:layout_width="match_parent"
+      android:layout_height="200dp"
+      app:layout_constraintBottom_toTopOf="@id/textInputLayout1"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@android:drawable/ic_menu_report_image" />
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/textInputLayout1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:boxBackgroundColor="@color/white"
+      app:boxStrokeColor="@color/teal_200"
+      app:layout_constraintTop_toBottomOf="@id/InputStoryImage">
+
+    <EditText
+        android:id="@+id/InputStoryTitle"
+        android:height="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textMultiLine|textCapSentences|textAutoComplete"
+        android:text="Title" />
+  </com.google.android.material.textfield.TextInputLayout>
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/textInputLayout2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="5dp"
+      app:boxBackgroundColor="@color/white"
+      app:boxCornerRadiusBottomEnd="2dp"
+      app:boxCornerRadiusBottomStart="2dp"
+      app:boxCornerRadiusTopEnd="2dp"
+      app:boxCornerRadiusTopStart="2dp"
+      app:boxStrokeColor="@color/teal_200"
+      app:layout_constraintTop_toBottomOf="@id/textInputLayout1">
+
+    <EditText
+        android:id="@+id/InputStoryMainBody"
+        android:height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine|textCapSentences|textAutoComplete" />
+  </com.google.android.material.textfield.TextInputLayout>
+  <Button
+      android:id="@+id/PostNewStoryButton"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:layout_marginTop="20dp"
+      android:text="Post New Story"
+      app:layout_constraintTop_toBottomOf="@id/textInputLayout2" />
+</androidx.constraintlayout.widget.ConstraintLayout>
