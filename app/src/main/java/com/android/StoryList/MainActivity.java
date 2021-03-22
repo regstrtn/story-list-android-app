@@ -1,5 +1,7 @@
 package com.android.StoryList;
 
+import static com.android.StoryList.util.Constants.FETCH_STORY_COUNT;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
@@ -47,6 +49,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
   RecyclerView r1;
   String titles[], descriptions[];
   int images[] = {R.drawable.aqueductsegovia, R.drawable.pompeii, R.drawable.hagiasofia, R.drawable.pantheon};
@@ -54,20 +57,27 @@ public class MainActivity extends AppCompatActivity {
   FirebaseFirestore dbRef;
   Context ctx;
 
+  private boolean loading = true;
+  int pastVisiblesItems, visibleItemCount, totalItemCount;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    LinearLayoutManager mLayoutManager;
+    mLayoutManager = new LinearLayoutManager(this);
     r1 = (RecyclerView) findViewById(R.id.StoriesList);
     titles = getResources().getStringArray(R.array.StoryTitles);
     descriptions = getResources().getStringArray(R.array.StoryContent);
     ctx = this;
-    r1.setLayoutManager(new LinearLayoutManager(this));
+    addPaginationToRecyclerView(r1, mLayoutManager);
+    r1.setLayoutManager(mLayoutManager);
+
     // storyListAdapter = new StoryListAdapter(this, titles, descriptions, images);
     // r1.setAdapter(storyListAdapter);
 
     dbRef = FirebaseFirestore.getInstance();
-    fetchStories();
+    fetchStories(FETCH_STORY_COUNT);
   }
 
   @Override
@@ -81,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
     switch(item.getItemId()) {
       case R.id.AddPostButton:
         openAddStoryPage();
-        Toast.makeText(this, "Adding post not enabled yet", Toast.LENGTH_SHORT).show();
         break;
       default:
         super.onOptionsItemSelected(item);
@@ -90,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     return true;
   }
 
-  private void fetchStories() {
+  private void fetchStories(int numStoriesToFetch) {
     // UNAUTHENTICATED Access will be removed after 30 days.
     dbRef.collection("Stories")
         .get()
@@ -118,6 +127,29 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+  }
+
+  public void addPaginationToRecyclerView(RecyclerView r1, LinearLayoutManager mLayoutManager) {
+    r1.addOnScrollListener(new RecyclerView.OnScrollListener() {
+      @Override
+      public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        if (dy > 0) { //check for scroll down
+          visibleItemCount = mLayoutManager.getChildCount();
+          totalItemCount = mLayoutManager.getItemCount();
+          pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+
+          if (loading) {
+            if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+              loading = false;
+              Log.v("...", "Last Item Wow !");
+              // Do pagination.. i.e. fetch new data
+              fetchStories(FETCH_STORY_COUNT);
+              loading = true;
+            }
+          }
+        }
+      }
+    });
   }
 
   public void openAddStoryPage() {
