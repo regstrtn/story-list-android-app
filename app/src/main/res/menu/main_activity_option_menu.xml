@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
   <item
-      android:id="@+id/UserLoginMenuItem"
+      android:id="@+id/UserProfileMenuItem"
       android:enabled="true"
       android:icon="@drawable/user_icon"
-      android:title="UserLoginMenuItem"
+      android:title="UserProfileMenuItem"
       android:visible="true"
       app:showAsAction="always" />
   <item

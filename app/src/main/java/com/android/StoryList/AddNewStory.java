@@ -183,8 +183,10 @@ public class AddNewStory extends AppCompatActivity {
   private void redirectIfUserNotLoggedIn() {
     FirebaseUser user = firebaseAuth.getCurrentUser();
     if (user == null) {
-      startActivity(new Intent(AddNewStory.this, UserLogin.class));
+      Intent openLoginPageIntent = new Intent(AddNewStory.this, UserLogin.class);
+      openLoginPageIntent.putExtra(Constants.INTENT_MESSAGE, "You need to be logged in to post a story.");
+      startActivity(openLoginPageIntent);
+      finish();
     }
-    finish();
   }
 }

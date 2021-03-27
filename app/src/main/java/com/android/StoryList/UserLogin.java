@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.android.StoryList.util.Constants;
 import com.example.StoryList.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,7 +25,7 @@ public class UserLogin extends AppCompatActivity {
 
   private EditText editTextEmail, editTextPassword;
   private Button loginButton;
-  private TextView registerUserLink;
+  private TextView registerUserLink, loginPageInformativeMessage;
   private Context ctx;
 
   private FirebaseAuth firebaseAuth;
@@ -33,7 +34,14 @@ public class UserLogin extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.user_login_activity);
+    firebaseAuth = FirebaseAuth.getInstance();
     ctx = this;
+
+    Intent intent = getIntent();
+    if (intent.hasExtra(Constants.INTENT_MESSAGE)) {
+      loginPageInformativeMessage = (TextView) findViewById(R.id.LoginPageInformativeMessage);
+      loginPageInformativeMessage.setText(intent.getStringExtra(Constants.INTENT_MESSAGE));
+    }
 
     loginButton = (Button) findViewById(R.id.LoginUserButton);
     editTextEmail = (EditText) findViewById(R.id.LoginPageEmailAddress);

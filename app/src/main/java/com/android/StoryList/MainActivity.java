@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
       case R.id.AddPostMenuItem:
         openAddStoryPage();
         break;
-      case R.id.UserLoginMenuItem:
-        openUserLoginPage();
+      case R.id.UserProfileMenuItem:
+        openUserProfilePage();
         break;
       case R.id.LogOutMenuItem:
         logOutUser();
@@ -143,8 +143,9 @@ public class MainActivity extends AppCompatActivity {
     startActivity(openAddStoryPageIntent);
   }
 
-  public void openUserLoginPage() {
-    startActivity(new Intent(this, UserLogin.class));
+  public void openUserProfilePage() {
+    Intent openUserProfilePageIntent = new Intent(this, UserProfile.class);
+    startActivity(openUserProfilePageIntent);
   }
 
   public void logOutUser() {
