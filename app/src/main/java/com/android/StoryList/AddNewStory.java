@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore.Images.Media;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.android.StoryList.util.Constants;
@@ -63,6 +66,24 @@ public class AddNewStory extends AppCompatActivity {
         openImageGallery(v);
       }
     });
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.add_post_option_menu, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch(item.getItemId()) {
+      case(R.id.DiscardPostButton):
+        goToFeedsActivity();
+        break;
+      default:
+        super.onOptionsItemSelected(item);
+    }
+    return true;
   }
 
   public void openImageGallery(View v) {
@@ -136,7 +157,7 @@ public class AddNewStory extends AppCompatActivity {
     });
   }
 
-  public void goToFeedsActivity(View view) {
+  public void goToFeedsActivity() {
     Intent goToFeedsPage = new Intent(ctx, MainActivity.class);
     startActivity(goToFeedsPage);
   }

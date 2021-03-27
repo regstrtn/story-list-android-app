@@ -35,6 +35,7 @@ public class StoryListAdapter extends RecyclerView.Adapter<StoryListAdapter.Stor
 
   @Override
   public void onBindViewHolder(StoryListAdapter.StoryListHolder holder, int position) {
+    holder.setIsRecyclable(false);
     holder.title.setText(titles[position]);
     holder.description.setText(descriptions[position]);
     // holder.storyImage.setImageResource(images[position]);
