@@ -13,13 +13,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.android.StoryList.util.Constants;
 import com.example.StoryList.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -34,13 +35,18 @@ public class AddNewStory extends AppCompatActivity {
   private static final String TITLE_FIELD = "Title";
   private static final String MAIN_BODY_FIELD = "MainBody";
   private static final String IMAGE_URL_FIELD = "ImageUrl";
+  private TextView loggedInUserName;
   private Uri imageUri;
   private ImageView inputStoryImageView;
   private TextView inputStoryTitle;
   private TextView inputStoryMainBody;
   private FirebaseFirestore dbRef;
-  FirebaseStorage storage;
+  private FirebaseStorage storage;
   private StorageReference storageRef;
+
+  // Authentication fields.
+  private FirebaseAuth firebaseAuth;
+  FirebaseUser loggedInUser;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +54,16 @@ public class AddNewStory extends AppCompatActivity {
     setContentView(R.layout.activity_add_new_story);
     dbRef = FirebaseFirestore.getInstance();
     storage = FirebaseStorage.getInstance();
+    firebaseAuth = FirebaseAuth.getInstance();
+    redirectIfUserNotLoggedIn();
     ctx = this;
 
+    loggedInUserName = (TextView) findViewById(R.id.LoggedInUserName);
     inputStoryTitle = (TextView) findViewById(R.id.InputStoryTitle);
     inputStoryMainBody = (TextView) findViewById(R.id.InputStoryMainBody);
     Button postNewStoryButton = (Button) findViewById(R.id.PostNewStoryButton);
+
+    fetchLoggedInUserName();
     postNewStoryButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -70,14 +81,14 @@ public class AddNewStory extends AppCompatActivity {
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.add_post_option_menu, menu);
+    getMenuInflater().inflate(R.menu.discard_current_action_menu, menu);
     return true;
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch(item.getItemId()) {
-      case(R.id.DiscardPostButton):
+      case(R.id.AbandonAction):
         goToFeedsActivity();
         break;
       default:
@@ -157,8 +168,23 @@ public class AddNewStory extends AppCompatActivity {
     });
   }
 
-  public void goToFeedsActivity() {
+  private void goToFeedsActivity() {
     Intent goToFeedsPage = new Intent(ctx, MainActivity.class);
     startActivity(goToFeedsPage);
+  }
+
+  public void fetchLoggedInUserName() {
+    loggedInUser = firebaseAuth.getCurrentUser();
+    if(loggedInUser != null) {
+      loggedInUserName.setText(loggedInUser.getDisplayName());
+    }
+  }
+
+  private void redirectIfUserNotLoggedIn() {
+    FirebaseUser user = firebaseAuth.getCurrentUser();
+    if (user == null) {
+      startActivity(new Intent(AddNewStory.this, UserLogin.class));
+    }
+    finish();
   }
 }

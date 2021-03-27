@@ -9,7 +9,9 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/Theme.StoryList1">
-    <activity android:name="com.android.StoryList.AddNewStory"></activity>
+    <activity android:name="com.android.StoryList.NewUserRegistration"></activity>
+    <activity android:name="com.android.StoryList.UserLogin" />
+    <activity android:name="com.android.StoryList.AddNewStory" />
     <activity android:name="com.android.StoryList.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -22,8 +24,9 @@
         android:name="preloaded_fonts"
         android:resource="@array/preloaded_fonts" />
   </application>
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
   <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
 </manifest>

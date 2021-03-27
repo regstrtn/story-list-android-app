@@ -3,8 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
   <item
-      android:id="@+id/AddPostButton"
-      android:icon="@drawable/add_post_button"
-      android:title="AddPost"
+      android:id="@+id/UserLoginMenuItem"
+      android:enabled="true"
+      android:icon="@drawable/user_icon"
+      android:title="UserLoginMenuItem"
+      android:visible="true"
       app:showAsAction="always" />
+  <item
+      android:id="@+id/AddPostMenuItem"
+      android:icon="@drawable/add_post_button"
+      android:title="AddPostMenuItem"
+      app:showAsAction="always" />
+  <item
+      android:id="@+id/LogOutMenuItem"
+      android:title="Log Out"
+      app:showAsAction="never"/>
 </menu>

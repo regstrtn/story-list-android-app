@@ -1,5 +1,8 @@
 package com.android.StoryList.util;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import com.android.StoryList.MainActivity;
@@ -16,6 +19,7 @@ public class Util {
     Collections.shuffle(descriptions, new Random(seed));
     Collections.shuffle(images, new Random(seed));
   }
+
 
   private Util () {
 

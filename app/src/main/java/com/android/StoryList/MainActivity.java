@@ -16,37 +16,14 @@ import com.android.StoryList.util.Util;
 import com.example.StoryList.R;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentChange.Type;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FieldPath;
-import com.google.firebase.firestore.FieldValue;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.FirebaseFirestoreSettings;
-import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.MetadataChanges;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.Query.Direction;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.ServerTimestamp;
-import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.firestore.Source;
-import com.google.firebase.firestore.Transaction;
-import com.google.firebase.firestore.WriteBatch;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,15 +31,18 @@ public class MainActivity extends AppCompatActivity {
   String titles[], descriptions[];
   int images[] = {R.drawable.aqueductsegovia, R.drawable.pompeii, R.drawable.hagiasofia, R.drawable.pantheon};
   StoryListAdapter storyListAdapter;
-  FirebaseFirestore dbRef;
   Context ctx;
 
   private boolean loading = true;
   int pastVisiblesItems, visibleItemCount, totalItemCount;
 
+  // Firebase fields.
+  FirebaseFirestore dbRef;
+  FirebaseAuth firebaseAuth;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    firebaseAuth = FirebaseAuth.getInstance();
     setContentView(R.layout.activity_main);
     LinearLayoutManager mLayoutManager;
     mLayoutManager = new LinearLayoutManager(this);
@@ -89,8 +69,14 @@ public class MainActivity extends AppCompatActivity {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch(item.getItemId()) {
-      case R.id.AddPostButton:
+      case R.id.AddPostMenuItem:
         openAddStoryPage();
+        break;
+      case R.id.UserLoginMenuItem:
+        openUserLoginPage();
+        break;
+      case R.id.LogOutMenuItem:
+        logOutUser();
         break;
       default:
         super.onOptionsItemSelected(item);
@@ -155,5 +141,18 @@ public class MainActivity extends AppCompatActivity {
   public void openAddStoryPage() {
     Intent openAddStoryPageIntent = new Intent(this, AddNewStory.class);
     startActivity(openAddStoryPageIntent);
+  }
+
+  public void openUserLoginPage() {
+    startActivity(new Intent(this, UserLogin.class));
+  }
+
+  public void logOutUser() {
+    FirebaseUser user = firebaseAuth.getCurrentUser();
+    if(user!=null) {
+      FirebaseAuth.getInstance().signOut();
+    } else {
+      Toast.makeText(this, "No user logged in.", Toast.LENGTH_SHORT).show();
+    }
   }
 }

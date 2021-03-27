@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp">
+
+  <Button
+      android:id="@+id/RegisterUserButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="20dp"
+      android:padding="10dp"
+      android:text="Register"
+      android:ems="12"
+      android:textSize="16sp"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/NewUserConfirmPassword" />
+  <EditText
+      android:id="@+id/NewUserPassword"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="20dp"
+      android:padding="10dp"
+      android:ems="12"
+      android:hint="Password (atleast 6 characters)"
+      android:inputType="textPassword"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+
+      app:layout_constraintTop_toBottomOf="@id/NewUserDisplayName" />
+  <EditText
+      android:id="@+id/NewUserConfirmPassword"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="20dp"
+      android:padding="10dp"
+      android:hint="Confirm Password"
+      android:ems="12"
+      android:inputType="textPassword"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+
+      app:layout_constraintTop_toBottomOf="@+id/NewUserPassword" />
+  <EditText
+      android:id="@+id/NewUserDisplayName"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="20dp"
+      android:padding="10dp"
+      android:ems="12"
+      android:hint="Display Name (no spaces)"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/NewUserEmailAddress" />
+  <EditText
+      android:id="@+id/NewUserEmailAddress"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="20dp"
+      android:padding="10dp"
+      android:hint="Email"
+      android:ems="12"
+      android:inputType="textEmailAddress"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/NewUserPageAppName" />
+  <TextView
+      android:id="@+id/NewUserPageAppName"
+      android:textStyle="bold|italic"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="20dp"
+      android:padding="10dp"
+      android:text="StoryList"
+      android:textAlignment="center"
+      android:textColor="@color/black"
+      android:textSize="32sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+  <TextView
+      android:id="@+id/BackToLoginPageMessage"
+      android:textStyle="italic"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="20dp"
+      android:padding="10dp"
+      android:autoLink="web"
+      android:text="Go back to login page."
+      android:textAlignment="center"
+      android:textSize="20sp"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/RegisterUserButton"
+      />
+</androidx.constraintlayout.widget.ConstraintLayout>
