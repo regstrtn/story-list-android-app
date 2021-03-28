@@ -1,4 +1,4 @@
-package com.android.StoryList;
+package com.stories.StoryList;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Color;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.util.Log;
 import android.view.Menu;
@@ -22,9 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.android.StoryList.util.Constants;
-import com.android.StoryList.util.Util;
-import com.example.StoryList.R;
+import com.stories.StoryList.util.Constants;
+import com.stories.StoryList.util.Util;
+import com.Stories.StoryList.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

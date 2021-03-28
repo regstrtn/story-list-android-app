@@ -6,15 +6,15 @@ plugins {
 apply plugin: 'com.google.gms.google-services'  // Google Services plugin
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 29
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.android.StoryList"
-        minSdkVersion 29
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        applicationId "com.stories.StoryList"
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 3
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

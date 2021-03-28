@@ -1,4 +1,4 @@
-package com.android.StoryList.util;
+package com.stories.StoryList.util;
 
 public class Constants {
 

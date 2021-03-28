@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.StoryList">
+    package="com.Stories.StoryList">
 
   <application
       android:allowBackup="true"
@@ -11,11 +11,11 @@
       android:theme="@style/Theme.StoryList1">
 <!--      android:theme="@style/Theme.StoryList1">-->
 
-    <activity android:name="com.android.StoryList.UserProfile"></activity>
-    <activity android:name="com.android.StoryList.NewUserRegistration" />
-    <activity android:name="com.android.StoryList.UserLogin" />
-    <activity android:name="com.android.StoryList.AddNewStory" />
-    <activity android:name="com.android.StoryList.MainActivity">
+    <activity android:name="com.stories.StoryList.UserProfile"></activity>
+    <activity android:name="com.stories.StoryList.NewUserRegistration" />
+    <activity android:name="com.stories.StoryList.UserLogin" />
+    <activity android:name="com.stories.StoryList.AddNewStory" />
+    <activity android:name="com.stories.StoryList.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 

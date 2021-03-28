@@ -1,4 +1,4 @@
-package com.android.StoryList;
+package com.stories.StoryList;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.StoryList.R;
+import com.Stories.StoryList.R;
 import com.squareup.picasso.Picasso;
 
 public class StoryListAdapter extends RecyclerView.Adapter<StoryListAdapter.StoryListHolder> {

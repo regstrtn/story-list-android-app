@@ -1,29 +1,22 @@
-package com.android.StoryList;
+package com.stories.StoryList;
 
-import static com.android.StoryList.util.Constants.FETCH_STORY_COUNT;
-import static com.android.StoryList.util.Util.logOutUser;
-import static com.android.StoryList.util.Util.openAddStoryPage;
-import static com.android.StoryList.util.Util.openUserProfilePage;
+import static com.stories.StoryList.util.Constants.FETCH_STORY_COUNT;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.util.Log;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.android.StoryList.util.Constants;
-import com.android.StoryList.util.Util;
-import com.example.StoryList.R;
+import com.stories.StoryList.util.Util;
+import com.Stories.StoryList.R;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -79,13 +72,13 @@ public class MainActivity extends AppCompatActivity {
         // recreate();
         break;
       case R.id.AddPostMenuItem:
-        openAddStoryPage(MainActivity.this);
+        Util.openAddStoryPage(MainActivity.this);
         break;
       case R.id.UserProfileMenuItem:
-        openUserProfilePage(MainActivity.this);
+        Util.openUserProfilePage(MainActivity.this);
         break;
       case R.id.LogOutMenuItem:
-        logOutUser(firebaseAuth, MainActivity.this);
+        Util.logOutUser(firebaseAuth, MainActivity.this);
         invalidateOptionsMenu();
         break;
       default:

@@ -1,6 +1,6 @@
-package com.android.StoryList;
+package com.stories.StoryList;
 
-import static com.android.StoryList.util.Constants.MIN_PASSWORD_LENGTH;
+import static com.stories.StoryList.util.Constants.MIN_PASSWORD_LENGTH;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,19 +14,14 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.android.StoryList.model.User;
-import com.android.StoryList.util.Constants;
-import com.example.StoryList.R;
+import com.Stories.StoryList.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class NewUserRegistration extends AppCompatActivity {
 

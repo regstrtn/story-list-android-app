@@ -1,18 +1,17 @@
-package com.android.StoryList.util;
+package com.stories.StoryList.util;
 
 
 import static androidx.core.content.ContextCompat.startActivity;
-import static com.android.StoryList.util.Constants.MAX_IMAGE_SIZE;
+import static com.stories.StoryList.util.Constants.MAX_IMAGE_SIZE;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
-import com.android.StoryList.AddNewStory;
-import com.android.StoryList.MainActivity;
-import com.android.StoryList.UserProfile;
+import com.stories.StoryList.AddNewStory;
+import com.stories.StoryList.MainActivity;
+import com.stories.StoryList.UserProfile;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;

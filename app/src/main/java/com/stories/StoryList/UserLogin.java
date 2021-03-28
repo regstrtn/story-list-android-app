@@ -1,4 +1,4 @@
-package com.android.StoryList;
+package com.stories.StoryList;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +12,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.android.StoryList.util.Constants;
-import com.example.StoryList.R;
+import com.stories.StoryList.util.Constants;
+import com.Stories.StoryList.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

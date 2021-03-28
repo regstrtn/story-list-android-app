@@ -1,25 +1,22 @@
-package com.android.StoryList;
+package com.stories.StoryList;
 
-import static com.android.StoryList.util.Util.logOutUser;
-import static com.android.StoryList.util.Util.openAddStoryPage;
-import static com.android.StoryList.util.Util.openFeedsPage;
-import static com.android.StoryList.util.Util.openUserProfilePage;
+import static com.stories.StoryList.util.Util.logOutUser;
+import static com.stories.StoryList.util.Util.openAddStoryPage;
+import static com.stories.StoryList.util.Util.openFeedsPage;
+import static com.stories.StoryList.util.Util.openUserProfilePage;
 
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.android.StoryList.util.Constants;
-import com.android.StoryList.util.Util;
-import com.example.StoryList.R;
+import com.stories.StoryList.util.Constants;
+import com.Stories.StoryList.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,8 +47,9 @@ public class UserProfile extends AppCompatActivity {
     firebaseAuth = FirebaseAuth.getInstance();
     fireStoreRef = FirebaseFirestore.getInstance();
 
-    redirectIfUserNotLoggedIn();
-    setDisplayName();
+    if(!isUserLoggedIn()) {
+      return;
+    }
 
     LinearLayoutManager mLayoutManager;
     mLayoutManager = new LinearLayoutManager(this);
@@ -60,7 +58,6 @@ public class UserProfile extends AppCompatActivity {
     ctx = this;
 
     fetchStories(1000);
-
   }
 
   @Override
@@ -97,18 +94,17 @@ public class UserProfile extends AppCompatActivity {
     return true;
   }
 
-  private void redirectIfUserNotLoggedIn() {
+  private boolean isUserLoggedIn() {
     firebaseUser = firebaseAuth.getCurrentUser();
     if (firebaseUser == null) {
       Intent openLoginPageIntent = new Intent(UserProfile.this, UserLogin.class);
       startActivity(openLoginPageIntent);
       finish();
+      return false;
     }
-  }
-
-  private void setDisplayName() {
     displayNameTextView = (TextView) findViewById(R.id.ProfilePageDisplayName);
     displayNameTextView.setText(firebaseUser.getDisplayName());
+    return true;
   }
 
   private void fetchStories(int numStoriesToFetch) {

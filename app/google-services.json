@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:648733631626:android:d7cc099fd5bdae2695b973",
         "android_client_info": {
-          "package_name": "com.android.StoryList"
+          "package_name": "com.stories.StoryList"
         }
       },
       "oauth_client": [

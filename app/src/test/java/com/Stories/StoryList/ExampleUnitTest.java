@@ -1,4 +1,4 @@
-package com.example.StoryList;
+package com.Stories.StoryList;
 
 import org.junit.Test;
 

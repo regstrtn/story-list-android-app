@@ -1,4 +1,4 @@
-package com.android.StoryList.model;
+package com.stories.StoryList.model;
 
 import android.net.Uri;
 
