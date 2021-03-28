@@ -9,6 +9,8 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/Theme.StoryList1">
+<!--      android:theme="@style/Theme.StoryList1">-->
+
     <activity android:name="com.android.StoryList.UserProfile"></activity>
     <activity android:name="com.android.StoryList.NewUserRegistration" />
     <activity android:name="com.android.StoryList.UserLogin" />

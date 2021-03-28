@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ public class UserLogin extends AppCompatActivity {
   private EditText editTextEmail, editTextPassword;
   private Button loginButton;
   private TextView registerUserLink, loginPageInformativeMessage;
+  private ProgressBar progressBar;
   private Context ctx;
 
   private FirebaseAuth firebaseAuth;
@@ -46,6 +48,7 @@ public class UserLogin extends AppCompatActivity {
     loginButton = (Button) findViewById(R.id.LoginUserButton);
     editTextEmail = (EditText) findViewById(R.id.LoginPageEmailAddress);
     editTextPassword = (EditText) findViewById(R.id.LoginPagePassword);
+    progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
     setLoginButtonClickListener();
 
@@ -75,6 +78,7 @@ public class UserLogin extends AppCompatActivity {
     loginButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
+        progressBar.setVisibility(View.VISIBLE);
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
@@ -93,6 +97,7 @@ public class UserLogin extends AppCompatActivity {
             new OnCompleteListener<AuthResult>() {
               @Override
               public void onComplete(Task<AuthResult> task) {
+                progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
                   // Redirect to feeds page.
                   Toast.makeText(UserLogin.this, "Logged in successfully.", Toast.LENGTH_SHORT).show();

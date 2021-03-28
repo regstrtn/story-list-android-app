@@ -5,7 +5,6 @@
     android:id="@+id/StoryContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#455a64"
     android:orientation="vertical">
 
   <ImageView
@@ -25,7 +24,6 @@
       android:paddingHorizontal="10dp"
       android:paddingVertical="4dp"
       android:text="StoryTitle"
-      android:textColor="#ffffff"
       android:textSize="20sp" />
   <LinearLayout
       android:id="@+id/StoryMetadataContainer"
@@ -39,7 +37,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:fontFamily="@font/montserrat"
-        android:textColor="#ffffff"
         android:paddingHorizontal="10dp"
         android:text="Admin" />
     <TextView
@@ -49,14 +46,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:fontFamily="@font/montserrat"
-        android:textColor="#ffffff"
         android:text="39 posts" />
     <ImageView
         android:id="@+id/LikeButtonImage"
         android:layout_width="10dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        app:srcCompat="@drawable/likebuttonwhite" />
+        app:srcCompat="@drawable/thumb_up_outline_black" />
     <TextView
         android:id="@+id/StoryLikeCount"
         android:textStyle="bold"
@@ -64,7 +60,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:fontFamily="@font/montserrat"
-        android:textColor="#ffffff"
         android:text="113 " />
     <TextView
         android:id="@+id/_EmptyFillerBox1"
@@ -76,11 +71,12 @@
       android:id="@+id/StoryMainBody"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginBottom="12dp"
       android:paddingBottom="4dp"
-      android:fontFamily="@font/caveat"
+      android:fontFamily="@font/kalam"
       android:paddingHorizontal="10dp"
       android:paddingVertical="4dp"
       android:text="MainBody"
-      android:textColor="#ffffff"
-      android:textSize="20sp" />
+      android:textColor="#646464"
+      android:textSize="18sp" />
 </LinearLayout>

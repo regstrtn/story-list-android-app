@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.android.StoryList.util.Constants;
 import com.android.StoryList.util.Util;
 import com.example.StoryList.R;
 
@@ -55,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
     // storyListAdapter = new StoryListAdapter(this, titles, descriptions, images);
     // r1.setAdapter(storyListAdapter);
-
     dbRef = FirebaseFirestore.getInstance();
     fetchStories(FETCH_STORY_COUNT);
   }
@@ -63,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.main_activity_option_menu, menu);
+    MenuItem logOutMenuItem = menu.findItem(R.id.LogOutMenuItem);
+    if (firebaseAuth.getCurrentUser()==null) {
+      logOutMenuItem.setVisible(false);
+    }
     return true;
   }
 
@@ -152,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser user = firebaseAuth.getCurrentUser();
     if(user!=null) {
       FirebaseAuth.getInstance().signOut();
+      invalidateOptionsMenu();
     } else {
       Toast.makeText(this, "No user logged in.", Toast.LENGTH_SHORT).show();
     }

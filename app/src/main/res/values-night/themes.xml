@@ -14,5 +14,7 @@
       ?attr/colorPrimaryVariant
     </item>
     <!-- Customize your theme here. -->
+    <!-- Customize your theme here. -->
+    <item name= "android:fontFamily" > @font/montserrat </item>
   </style>
 </resources>

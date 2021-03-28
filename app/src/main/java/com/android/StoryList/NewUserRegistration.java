@@ -51,7 +51,7 @@ public class NewUserRegistration extends AppCompatActivity {
     editTextDisplayName = (EditText) findViewById(R.id.NewUserDisplayName);
     editTextPassword = (EditText) findViewById(R.id.NewUserPassword);
     editTextConfirmPassword = (EditText) findViewById(R.id.NewUserConfirmPassword);
-    progressBar = (ProgressBar) findViewById(R.id.SHOW_PROGRESS);
+    progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
     setBackToLoginPageClickListener();
   }
@@ -78,6 +78,7 @@ public class NewUserRegistration extends AppCompatActivity {
     registerUserButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
+        progressBar.setVisibility(View.VISIBLE);
         String email = editTextEmail.getText().toString().trim();
         String displayName = editTextDisplayName.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
@@ -116,6 +117,7 @@ public class NewUserRegistration extends AppCompatActivity {
             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
               @Override
               public void onComplete(Task<AuthResult> task) {
+                progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
                   UserProfileChangeRequest profileUpdates =
                       new UserProfileChangeRequest.Builder().setDisplayName(displayName).build();

@@ -8,5 +8,6 @@ public class Constants {
   public static int MIN_PASSWORD_LENGTH = 6;
 
   public static String INTENT_MESSAGE = "IntentMessage";
+
   private Constants() {}
 }

@@ -28,14 +28,15 @@
   <ImageView
       android:id="@+id/InputStoryImage"
       android:layout_width="match_parent"
-      android:layout_height="200dp"
+      android:layout_height="wrap_content"
+      android:minHeight="150dp"
       app:layout_constraintBottom_toTopOf="@id/InputStoryTitle"
       app:layout_constraintTop_toTopOf="parent"
       app:srcCompat="@drawable/add_image_button" />
 
   <EditText
       android:id="@+id/InputStoryTitle"
-      android:height="50dp"
+      android:minHeight="50dp"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_margin="6dp"
@@ -43,13 +44,14 @@
       android:background="@drawable/border_text_box"
       android:ems="10"
       android:hint="Title"
+      android:maxLength="80"
       android:inputType="textMultiLine|textCapSentences|textAutoComplete"
       app:layout_constraintTop_toBottomOf="@id/InputStoryImage"
-      tools:layout_editor_absoluteX="6dp" />
+       />
 
   <EditText
       android:id="@+id/InputStoryMainBody"
-      android:height="180dp"
+      android:minHeight="240dp"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_margin="6dp"
@@ -58,15 +60,33 @@
       android:ems="10"
       android:gravity="start|top"
       android:hint="Description"
+      android:maxLength="1000"
       android:inputType="textMultiLine|textCapSentences|textAutoComplete"
       app:layout_constraintTop_toBottomOf="@id/InputStoryTitle"
-      tools:layout_editor_absoluteX="6dp" />
+       />
   <Button
       android:id="@+id/PostNewStoryButton"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_weight="1"
       android:layout_marginTop="20dp"
+      android:padding="10dp"
       android:text="Post New Story"
+      android:textSize="16sp"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintTop_toBottomOf="@id/LoggedInUserName" />
+
+  <ProgressBar
+      android:id="@id/progressBar"
+      style="?android:attr/progressBarStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+  />
 </androidx.constraintlayout.widget.ConstraintLayout>

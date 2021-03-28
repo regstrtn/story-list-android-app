@@ -5,4 +5,18 @@
   <color name="teal_700">#FF018786</color>
   <color name="black">#FF000000</color>
   <color name="white">#FFFFFFFF</color>
+
+  <color name="bluegray">#90a4ae</color>
+  <color name="bluegraylight">#c1d5e0</color>
+  <color name="bluegraydark">#62757f</color>
+  <color name="blue_200">#40c4ff</color>
+  <color name="bluelight">#82f7ff</color>
+  <color name="bluedark">#0094cc</color>
+
+<!--  Gray and Orange theme colors-->
+  <color name="gray_700">#344955</color>
+  <color name="gray_800">#232f34</color>
+  <color name="gray_600">#4a6572</color>
+  <color name="orange_500">#F9AA33</color>
+
 </resources>

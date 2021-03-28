@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,8 +39,8 @@ public class AddNewStory extends AppCompatActivity {
   private TextView loggedInUserName;
   private Uri imageUri;
   private ImageView inputStoryImageView;
-  private TextView inputStoryTitle;
-  private TextView inputStoryMainBody;
+  private TextView inputStoryTitle, inputStoryMainBody;
+  private ProgressBar progressBar;
   private FirebaseFirestore dbRef;
   private FirebaseStorage storage;
   private StorageReference storageRef;
@@ -62,19 +63,22 @@ public class AddNewStory extends AppCompatActivity {
     inputStoryTitle = (TextView) findViewById(R.id.InputStoryTitle);
     inputStoryMainBody = (TextView) findViewById(R.id.InputStoryMainBody);
     Button postNewStoryButton = (Button) findViewById(R.id.PostNewStoryButton);
+    progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
     fetchLoggedInUserName();
-    postNewStoryButton.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        postNewStory(v);
-      }
-    });
+
     inputStoryImageView = (ImageView) findViewById(R.id.InputStoryImage);
     inputStoryImageView.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
         openImageGallery(v);
+      }
+    });
+
+    postNewStoryButton.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        postNewStory(v);
       }
     });
   }
@@ -114,7 +118,7 @@ public class AddNewStory extends AppCompatActivity {
 
 
   public void postNewStory(View v) {
-    Toast.makeText(ctx,"Post Story Button clicked.", Toast.LENGTH_SHORT).show();
+    progressBar.setVisibility(View.VISIBLE);
     String storyTitle = inputStoryTitle.getText().toString();
     String storyMainBody = inputStoryMainBody.getText().toString();
 
@@ -156,6 +160,7 @@ public class AddNewStory extends AppCompatActivity {
         .addOnSuccessListener(new OnSuccessListener<Void>() {
       @Override
       public void onSuccess(Void unused) {
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(ctx, "Your story added successfully!", Toast.LENGTH_SHORT).show();
         Intent backToStoryFeed = new Intent(ctx, MainActivity.class);
         startActivity(backToStoryFeed);
@@ -163,6 +168,7 @@ public class AddNewStory extends AppCompatActivity {
     }).addOnFailureListener(new OnFailureListener() {
       @Override
       public void onFailure(Exception e) {
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(ctx, "Story could not be added.", Toast.LENGTH_SHORT).show();
       }
     });
