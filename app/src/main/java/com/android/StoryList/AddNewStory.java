@@ -38,7 +38,7 @@ public class AddNewStory extends AppCompatActivity {
   private TextView loggedInUserTextView;
   private Uri imageUri;
   private ImageView inputStoryImageView, addStoryButton;
-  private TextView inputStoryTitle, inputStoryMainBody;
+  private TextView inputStoryTitleTextView, inputStoryMainBodyTextView;
   private ProgressBar progressBar;
   private FirebaseFirestore dbRef;
   private FirebaseStorage storage;
@@ -59,8 +59,8 @@ public class AddNewStory extends AppCompatActivity {
     ctx = this;
 
     loggedInUserTextView = (TextView) findViewById(R.id.LoggedInUserName);
-    inputStoryTitle = (TextView) findViewById(R.id.InputStoryTitle);
-    inputStoryMainBody = (TextView) findViewById(R.id.InputStoryMainBody);
+    inputStoryTitleTextView = (TextView) findViewById(R.id.InputStoryTitle);
+    inputStoryMainBodyTextView = (TextView) findViewById(R.id.InputStoryMainBody);
     addStoryButton = (ImageView) findViewById(R.id.AddImageButton);
     Button postNewStoryButton = (Button) findViewById(R.id.PostNewStoryButton);
     progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -119,9 +119,13 @@ public class AddNewStory extends AppCompatActivity {
 
 
   public void postNewStory(View v) {
+    if(!areInputsValid(inputStoryTitleTextView, inputStoryMainBodyTextView, inputStoryImageView)) {
+      return;
+    }
+
     progressBar.setVisibility(View.VISIBLE);
-    String storyTitle = inputStoryTitle.getText().toString();
-    String storyMainBody = inputStoryMainBody.getText().toString();
+    String storyTitle = inputStoryTitleTextView.getText().toString();
+    String storyMainBody = inputStoryMainBodyTextView.getText().toString();
 
     // String uploadedImageUrl = uploadImageAndGetUrl(imageUri);
     Map<String, Object> newStory = new HashMap<>();
@@ -165,8 +169,8 @@ public class AddNewStory extends AppCompatActivity {
       public void onSuccess(Void unused) {
         progressBar.setVisibility(View.GONE);
         Toast.makeText(ctx, "Your story added successfully!", Toast.LENGTH_SHORT).show();
-        Intent backToStoryFeed = new Intent(ctx, MainActivity.class);
-        startActivity(backToStoryFeed);
+        Intent goToUserProfile = new Intent(ctx, UserProfile.class);
+        startActivity(goToUserProfile);
       }
     }).addOnFailureListener(new OnFailureListener() {
       @Override
@@ -197,5 +201,22 @@ public class AddNewStory extends AppCompatActivity {
       startActivity(openLoginPageIntent);
       finish();
     }
+  }
+
+  private static boolean areInputsValid(TextView inputStoryTitle, TextView inputStoryMainBody, ImageView inputStoryImageView) {
+    if(inputStoryTitle.getText().toString().isEmpty()) {
+      inputStoryTitle.setError("Title cannot be empty.");
+      inputStoryTitle.requestFocus();
+      return false;
+    }
+    if(inputStoryMainBody.getText().toString().isEmpty()) {
+      inputStoryMainBody.setError("Description cannot be empty.");
+      inputStoryMainBody.requestFocus();
+      return false;
+    }
+    if (inputStoryImageView.getDrawable() == null) {
+      return false;
+    }
+    return true;
   }
 }

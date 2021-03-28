@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch(item.getItemId()) {
       case R.id.HomeButtonMenuItem:
+        // recreate();
         break;
       case R.id.AddPostMenuItem:
         openAddStoryPage(MainActivity.this);

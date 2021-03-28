@@ -12,8 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.StoryList.util.Constants;
 import com.android.StoryList.util.Util;
@@ -34,11 +36,12 @@ public class UserProfile extends AppCompatActivity {
   private FirebaseFirestore fireStoreRef;
 
 
-  StoryListAdapter storyListAdapter;
-  RecyclerView r1;
-  Context ctx;
+  private StoryListAdapter storyListAdapter;
+  private RecyclerView r1;
+  private Context ctx;
 
-
+  private TextView displayNameTextView;
+  
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +51,14 @@ public class UserProfile extends AppCompatActivity {
     fireStoreRef = FirebaseFirestore.getInstance();
 
     redirectIfUserNotLoggedIn();
+    setDisplayName();
 
+    LinearLayoutManager mLayoutManager;
+    mLayoutManager = new LinearLayoutManager(this);
     r1 = (RecyclerView) findViewById(R.id.StoriesList);
+    r1.setLayoutManager(mLayoutManager);
     ctx = this;
 
-    findViewById(R.id.textView3).setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        startActivity(new Intent(UserProfile.this, MainActivity.class));
-      }
-    });
     fetchStories(1000);
 
   }
@@ -103,6 +104,11 @@ public class UserProfile extends AppCompatActivity {
       startActivity(openLoginPageIntent);
       finish();
     }
+  }
+
+  private void setDisplayName() {
+    displayNameTextView = (TextView) findViewById(R.id.ProfilePageDisplayName);
+    displayNameTextView.setText(firebaseUser.getDisplayName());
   }
 
   private void fetchStories(int numStoriesToFetch) {
