@@ -2,7 +2,9 @@ package com.android.StoryList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.util.Log;
 import android.view.Menu;
@@ -38,7 +40,7 @@ public class AddNewStory extends AppCompatActivity {
   private static final String IMAGE_URL_FIELD = "ImageUrl";
   private TextView loggedInUserName;
   private Uri imageUri;
-  private ImageView inputStoryImageView;
+  private ImageView inputStoryImageView, addStoryButton;
   private TextView inputStoryTitle, inputStoryMainBody;
   private ProgressBar progressBar;
   private FirebaseFirestore dbRef;
@@ -62,13 +64,14 @@ public class AddNewStory extends AppCompatActivity {
     loggedInUserName = (TextView) findViewById(R.id.LoggedInUserName);
     inputStoryTitle = (TextView) findViewById(R.id.InputStoryTitle);
     inputStoryMainBody = (TextView) findViewById(R.id.InputStoryMainBody);
+    addStoryButton = (ImageView) findViewById(R.id.AddImageButton);
     Button postNewStoryButton = (Button) findViewById(R.id.PostNewStoryButton);
     progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
     fetchLoggedInUserName();
 
     inputStoryImageView = (ImageView) findViewById(R.id.InputStoryImage);
-    inputStoryImageView.setOnClickListener(new OnClickListener() {
+    addStoryButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
         openImageGallery(v);
