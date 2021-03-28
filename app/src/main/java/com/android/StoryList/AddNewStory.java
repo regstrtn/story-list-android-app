@@ -3,6 +3,7 @@ package com.android.StoryList;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
@@ -116,6 +117,7 @@ public class AddNewStory extends AppCompatActivity {
       imageUri = data.getData();
       Log.i("ImageURI", String.valueOf(imageUri));
       inputStoryImageView.setImageURI(imageUri);
+      inputStoryImageView.setBackgroundColor(Color.GRAY);
     }
   }
 

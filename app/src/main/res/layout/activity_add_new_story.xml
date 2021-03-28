@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:cropToPadding="true"
         android:gravity="center"
-        android:scaleType="centerCrop" />
+        android:scaleType="fitCenter" />
   </androidx.cardview.widget.CardView>
 
   <ImageView
