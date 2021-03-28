@@ -2,8 +2,13 @@ package com.android.StoryList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
 import android.graphics.Color;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +23,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.android.StoryList.util.Constants;
+import com.android.StoryList.util.Util;
 import com.example.StoryList.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,6 +34,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.firebase.storage.UploadTask.TaskSnapshot;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +54,11 @@ public class AddNewStory extends AppCompatActivity {
 
   // Authentication fields.
   private FirebaseAuth firebaseAuth;
-  FirebaseUser loggedInUser;
+  private FirebaseUser loggedInUser;
+
+
+  Bitmap bmp;
+  ByteArrayOutputStream bos;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -111,9 +123,21 @@ public class AddNewStory extends AppCompatActivity {
     super.onActivityResult(requestCode, resultCode, data);
     if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
       imageUri = data.getData();
-      Log.i("ImageURI", String.valueOf(imageUri));
-      inputStoryImageView.setImageURI(imageUri);
-      inputStoryImageView.setBackgroundColor(Color.GRAY);
+      try {
+        InputStream input = this.getContentResolver().openInputStream(imageUri);
+
+        bmp = BitmapFactory.decodeStream(input, null, new Options());
+        bmp = Util.getResizedBitmap(bmp);
+        bos = new ByteArrayOutputStream();
+        bmp.compress(CompressFormat.JPEG, 70, bos);
+        Log.i("ImageURI", String.valueOf(imageUri));
+        inputStoryImageView.setImageBitmap(bmp);
+        inputStoryImageView.setBackgroundColor(Color.GRAY);
+
+      }
+      catch (Exception e) {
+        return;
+      }
     }
   }
 
@@ -143,7 +167,8 @@ public class AddNewStory extends AppCompatActivity {
     final Uri[] uploadedImageUrl = new Uri[1];
     storageRef = storage.getReference();
     StorageReference imagesRef = storageRef.child("images/"+imageUri.getLastPathSegment());
-    UploadTask uploadTask = imagesRef.putFile(imageUri);
+    // UploadTask uploadTask = imagesRef.putFile(imageUri);
+    UploadTask uploadTask = imagesRef.putBytes(bos.toByteArray());
 
     uploadTask.addOnSuccessListener(
         new OnSuccessListener<TaskSnapshot>() {

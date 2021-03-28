@@ -2,9 +2,11 @@ package com.android.StoryList.util;
 
 
 import static androidx.core.content.ContextCompat.startActivity;
+import static com.android.StoryList.util.Constants.MAX_IMAGE_SIZE;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -50,6 +52,23 @@ public class Util {
       Toast.makeText(ctx, "No user logged in.", Toast.LENGTH_SHORT).show();
     }
   }
+
+
+  public static Bitmap getResizedBitmap(Bitmap image) {
+    int width = image.getWidth();
+    int height = image.getHeight();
+
+    float bitmapRatio = (float)width / (float) height;
+    if (bitmapRatio > 1) {
+      width = MAX_IMAGE_SIZE;
+      height = (int) (width / bitmapRatio);
+    } else {
+      height = MAX_IMAGE_SIZE;
+      width = (int) (height * bitmapRatio);
+    }
+    return Bitmap.createScaledBitmap(image, width, height, true);
+  }
+
 
   private Util () {
 

@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
   RecyclerView r1;
   String titles[], descriptions[];
-  int images[] = {R.drawable.aqueductsegovia, R.drawable.pompeii, R.drawable.hagiasofia, R.drawable.pantheon};
   StoryListAdapter storyListAdapter;
   Context ctx;
 

@@ -6,6 +6,7 @@ public class Constants {
   public static String COLLECTION_USERS = "Users";
   public static int FETCH_STORY_COUNT = 3;
   public static int MIN_PASSWORD_LENGTH = 6;
+  public static int MAX_IMAGE_SIZE = 800;
 
   public static final String TITLE_FIELD = "Title";
   public static final String MAIN_BODY_FIELD = "MainBody";
@@ -15,6 +16,7 @@ public class Constants {
 
 
   public static String INTENT_MESSAGE = "IntentMessage";
+
 
   private Constants() {}
 }
