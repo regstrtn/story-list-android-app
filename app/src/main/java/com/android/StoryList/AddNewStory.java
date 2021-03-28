@@ -2,10 +2,8 @@ package com.android.StoryList;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.util.Log;
 import android.view.Menu;
@@ -36,10 +34,8 @@ import java.util.Map;
 public class AddNewStory extends AppCompatActivity {
   Context ctx;
   private static final int PICK_IMAGE = 100;
-  private static final String TITLE_FIELD = "Title";
-  private static final String MAIN_BODY_FIELD = "MainBody";
-  private static final String IMAGE_URL_FIELD = "ImageUrl";
-  private TextView loggedInUserName;
+
+  private TextView loggedInUserTextView;
   private Uri imageUri;
   private ImageView inputStoryImageView, addStoryButton;
   private TextView inputStoryTitle, inputStoryMainBody;
@@ -62,7 +58,7 @@ public class AddNewStory extends AppCompatActivity {
     redirectIfUserNotLoggedIn();
     ctx = this;
 
-    loggedInUserName = (TextView) findViewById(R.id.LoggedInUserName);
+    loggedInUserTextView = (TextView) findViewById(R.id.LoggedInUserName);
     inputStoryTitle = (TextView) findViewById(R.id.InputStoryTitle);
     inputStoryMainBody = (TextView) findViewById(R.id.InputStoryMainBody);
     addStoryButton = (ImageView) findViewById(R.id.AddImageButton);
@@ -129,9 +125,11 @@ public class AddNewStory extends AppCompatActivity {
 
     // String uploadedImageUrl = uploadImageAndGetUrl(imageUri);
     Map<String, Object> newStory = new HashMap<>();
-    newStory.put(TITLE_FIELD, storyTitle);
-    newStory.put(MAIN_BODY_FIELD, storyMainBody);
-    newStory.put(IMAGE_URL_FIELD, "");
+    newStory.put(Constants.TITLE_FIELD, storyTitle);
+    newStory.put(Constants.MAIN_BODY_FIELD, storyMainBody);
+    newStory.put(Constants.IMAGE_URL_FIELD, "");
+    newStory.put(Constants.STORY_AUTHOR_UID_FIELD, loggedInUser.getUid());
+    newStory.put(Constants.STORY_AUTHOR_DISPLAY_NAME_FIELD, loggedInUser.getDisplayName());
     uploadImageAndText(newStory, imageUri);
 
     Log.i("DataToSend", newStory.toString());
@@ -151,7 +149,7 @@ public class AddNewStory extends AppCompatActivity {
               @Override
               public void onSuccess(Uri uri) {
                 uploadedImageUrl[0] = uri;
-                newStory.put(IMAGE_URL_FIELD, uri.toString());
+                newStory.put(Constants.IMAGE_URL_FIELD, uri.toString());
                 uploadNewStoryData(newStory);
               }
             });
@@ -187,7 +185,7 @@ public class AddNewStory extends AppCompatActivity {
   public void fetchLoggedInUserName() {
     loggedInUser = firebaseAuth.getCurrentUser();
     if(loggedInUser != null) {
-      loggedInUserName.setText(loggedInUser.getDisplayName());
+      loggedInUserTextView.setText(loggedInUser.getDisplayName());
     }
   }
 

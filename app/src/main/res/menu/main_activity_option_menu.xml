@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
   <item
+      android:id="@+id/HomeButtonMenuItem"
+      android:icon="@drawable/home_icon"
+      android:title="HomeButtonMenuItem"
+      app:showAsAction="always" />
+  <item
       android:id="@+id/UserProfileMenuItem"
       android:enabled="true"
       android:icon="@drawable/user_icon"

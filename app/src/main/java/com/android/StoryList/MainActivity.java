@@ -1,6 +1,9 @@
 package com.android.StoryList;
 
 import static com.android.StoryList.util.Constants.FETCH_STORY_COUNT;
+import static com.android.StoryList.util.Util.logOutUser;
+import static com.android.StoryList.util.Util.openAddStoryPage;
+import static com.android.StoryList.util.Util.openUserProfilePage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -73,14 +76,17 @@ public class MainActivity extends AppCompatActivity {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch(item.getItemId()) {
+      case R.id.HomeButtonMenuItem:
+        break;
       case R.id.AddPostMenuItem:
-        openAddStoryPage();
+        openAddStoryPage(MainActivity.this);
         break;
       case R.id.UserProfileMenuItem:
-        openUserProfilePage();
+        openUserProfilePage(MainActivity.this);
         break;
       case R.id.LogOutMenuItem:
-        logOutUser();
+        logOutUser(firebaseAuth, MainActivity.this);
+        invalidateOptionsMenu();
         break;
       default:
         super.onOptionsItemSelected(item);
@@ -142,23 +148,4 @@ public class MainActivity extends AppCompatActivity {
     });
   }
 
-  public void openAddStoryPage() {
-    Intent openAddStoryPageIntent = new Intent(this, AddNewStory.class);
-    startActivity(openAddStoryPageIntent);
-  }
-
-  public void openUserProfilePage() {
-    Intent openUserProfilePageIntent = new Intent(this, UserProfile.class);
-    startActivity(openUserProfilePageIntent);
-  }
-
-  public void logOutUser() {
-    FirebaseUser user = firebaseAuth.getCurrentUser();
-    if(user!=null) {
-      FirebaseAuth.getInstance().signOut();
-      invalidateOptionsMenu();
-    } else {
-      Toast.makeText(this, "No user logged in.", Toast.LENGTH_SHORT).show();
-    }
-  }
 }
